@@ -15,13 +15,13 @@ from few_shots import few_shots
 
 def get_few_shot_db_chain():
     db_user = "root"
-    db_password = "aman2003"
+    db_password = "your-password"
     db_host = "localhost"
     db_name = "atliq_tshirts"
 
     db = SQLDatabase.from_uri(f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}",
                               sample_rows_in_table_info=3)
-    llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key="AIzaSyA8e72rxxQxB3dQ4QJ_DlsrzPcRtSPlSO0", temperature=0.1)
+    llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key="Your API Key ", temperature=0.1)
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
     to_vectorize = [" ".join(example.values()) for example in few_shots]
     vectorstore = Chroma.from_texts(to_vectorize, embeddings, metadatas=few_shots)
